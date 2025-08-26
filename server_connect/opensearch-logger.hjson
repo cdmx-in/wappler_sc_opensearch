@@ -1,0 +1,314 @@
+[
+  {
+    "type": "opensearch_logger",
+    "module": "opensearch-logger",
+    "action": "logger",
+    "groupTitle": "Logging",
+    "groupIcon": "fas fa-lg fa-file-alt comp-exec",
+    "title": "Send Log to OpenSearch",
+    "icon": "fas fa-lg fa-terminal comp-exec",
+    "usedModules": {
+      "node": {
+        @opensearch-project/opensearch: "^2.5.0"
+      }
+    },
+    "properties": [
+      {
+        "group": "Log",
+        "variables": [
+          {
+            "name": "actionName",
+            "optionName": "name",
+            "title": "Name",
+            "type": "text",
+            "required": true,
+            "defaultValue": ""
+          },
+          {
+            "name": "timestamp",
+            "optionName": "timestamp",
+            "title": "Timestamp",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "Timestamp, ex: NOW_UTC,etc"
+          },
+          {
+            "name": "log_level",
+            "optionName": "log_level",
+            "title": "Log Level",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "The log level"
+          },
+          {
+            "name": "log_id",
+            "optionName": "log_id",
+            "title": "Log ID",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "The log ID for grouping events"
+          },
+          {
+            "name": "user_id",
+            "optionName": "user_id",
+            "title": "Action User ID",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "User ID from Provider"
+          },
+          {
+            "name": "user_email",
+            "optionName": "user_email",
+            "title": "Action User Email",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "User Email from Provider"
+          },
+          {
+            "name": "event_type",
+            "optionName": "event_type",
+            "title": "Event Type",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "Event Type or Action"
+          },
+          {
+            "name": "message",
+            "optionName": "message",
+            "title": "Message",
+            "type": "text",
+            "required": true,
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "The log message"
+          },
+          {
+            "name": "domain",
+            "optionName": "domain",
+            "title": "Domain",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "Domain Name, ex: site.example.com etc"
+          },
+          {
+            "name": "service",
+            "optionName": "service",
+            "title": "Service",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "Service Type, ex: payments, etc"
+          },
+          {
+            "name": "isNote",
+            "optionName": "is_note",
+            "title": "Is Note",
+            "type": "boolean",
+            "required": false,
+            "defaultValue": false
+          },
+          {
+            "name": "context",
+            "optionName": "context",
+            "title": "Message Context",
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Additional details as a JSON object"
+          },
+          
+        ]
+      },
+      {
+        "group": "Opensearch Config",
+        "variables": [
+          {
+            "name": "url",
+            "optionName": "url",
+            "title": "Instance URL",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "URL of the opensearch Instance eg: https://192.168.18.10:9200"
+          },
+          {
+            "name": "index",
+            "optionName": "index",
+            "title": "Index",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "Index name, eg: nodejs-logs"
+          },
+          {
+            "name": "refresh",
+            "optionName": "refresh",
+            "title": "Refresh",
+            "type": "boolean",
+            "defaultValue": true,
+            "help": "Enable if you want the logs to be immediately searchable, Note: Enabling this option can potentially contribute to increased memory usage."
+          },
+          {
+            "name": "ssl_check",
+            "optionName": "ssl_check",
+            "title": "SSL/TLS Insecure",
+            "type": "boolean",
+            "defaultValue": true
+          }
+        ]
+      },
+      {
+        group: 'Output',
+        variables: [
+          { name: 'output', optionName: 'output', title: 'Output', initValue: true, defaultValue: false, type: 'boolean'}
+        ]
+      }
+    ]
+  },
+  {
+    "type": "opensearch_query",
+    "module": "opensearch-query",
+    "action": "ops_query",
+    "groupTitle": "Logging",
+    "groupIcon": "fas fa-lg fa-file-alt comp-exec",
+    "title": "Fetch Logs from OpenSearch",
+    "icon": "fas fa-lg fa-table comp-exec",
+    "dataPickObject": true,
+    "usedModules": {
+      "node": {
+        @opensearch-project/opensearch: "^1.2.0"
+      }
+    },
+    "properties": [
+      {
+        "group": "Log",
+        "variables": [
+          {
+            "name": "actionName",
+            "optionName": "name",
+            "title": "Name",
+            "type": "text",
+            "required": true,
+            "defaultValue": ""
+          },
+          {
+            "name": "query",
+            "optionName": "query",
+            "title": "Search Value",
+            "type": "text",
+            "serverDataBindings": true,
+            "help": "Search String"
+          },
+          {
+            "name": "field",
+            "optionName": "field",
+            "title": "Search Field",
+            "type": "text",
+            "serverDataBindings": true,
+            "help": "Search Field"
+          },
+          {
+            "name": "output_fields",
+            "optionName": "output_fields",
+            "title": "Output Fields",
+            "type": "text",
+            "serverDataBindings": true,
+            "help": "Output Fields to be fetched"
+          },
+          {
+            "name": "sortField",
+            "optionName": "sort_field",
+            "title": "Sort Field",
+            "type": "text",
+            "serverDataBindings": true,
+            "help": "Filed for sorting in descending order."
+          },
+          {
+            "name": "sortOrder",
+            "optionName": "sort_order",
+            "title": "Sort Order",
+            "type": "droplist",
+            "defaultValue": 'desc',
+            "values": [
+            {title: 'Descending', value: 'desc'},
+            {title: 'Ascending', value: 'asc'}
+            ],
+            "serverDataBindings": true,
+            "help": "Filed for setting sort order."
+          },
+          {
+            "name": "timestampField",
+            "optionName": "timestampField",
+            "title": "Timestamp Field",
+            "type": "text",
+            "required": false,
+            "serverDataBindings": true,
+            "defaultValue": "@timestamp"
+            "help": "Timestamp field, ex: @timestamp, ts, etc"
+          },
+          {
+            "name": "fromTimestamp",
+            "optionName": "fromTimestamp",
+            "title": "From Date",
+            "type": "text",
+            "required": false,
+            "serverDataBindings": true,
+            "help": "Timestamp, ex: NOW_UTC,etc"
+          },
+          {
+            "name": "toTimestamp",
+            "optionName": "toTimestamp",
+            "title": "To Date",
+            "type": "text",
+            "required": false,
+            "serverDataBindings": true,
+            "help": "Timestamp, ex: NOW_UTC,etc"
+          },
+          {
+            "name": "isNote",
+            "optionName": "is_note",
+            "title": "Is Note",
+            "type": "boolean",
+            "required": false,
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "group": "Opensearch Config",
+        "variables": [
+          {
+            "name": "index",
+            "optionName": "index",
+            "title": "Index",
+            "type": "text",
+            "required": true,
+            "serverDataBindings": true,
+            "help": "Index name, eg: nodejs-logs"
+          },
+          {
+            "name": "ssl_check",
+            "optionName": "ssl_check",
+            "title": "SSL/TLS Insecure",
+            "type": "boolean",
+            "defaultValue": true
+          }
+        ]
+      },
+      {
+        group: 'Output',
+        variables: [
+          { name: 'output', optionName: 'output', title: 'Output', initValue: true, defaultValue: false, type: 'boolean'}
+        ]
+      }
+    ]
+  }
+]
