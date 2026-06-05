@@ -9,6 +9,10 @@ exports.ops_query = async function (options) {
   const timestampField = this.parse(options.timestampField) || '@timestamp';
   const sortField = this.parse(options.sort_field);
   const sortOrder = this.parse(options.sort_order) || 'desc';
+  // Optional key/value and function filters (each is ANDed in when provided)
+  const pKey = this.parse(options.p_key);
+  const pValue = this.parse(options.p_value);
+  const functionFilter = this.parse(options.function);
   const opensearchConfig = {
     node: opsUrl,
     auth: {
@@ -48,14 +52,38 @@ exports.ops_query = async function (options) {
                 },
               }
             : undefined,
-            options.is_note ? 
+            options.is_note ?
             {
               term: {
                 is_note: this.parse(options.is_note),
               },
             }
             : undefined,
-        ].filter(Boolean), 
+          // Optional filter on the p_key field, ex: p_key = TRANSACTION
+          pKey
+            ? {
+                match_phrase: {
+                  p_key: pKey,
+                },
+              }
+            : undefined,
+          // Optional filter on the p_value field, ex: p_value = 34569345
+          pValue
+            ? {
+                match_phrase: {
+                  p_value: pValue,
+                },
+              }
+            : undefined,
+          // Optional filter on the function field, ex: function = NOTE
+          functionFilter
+            ? {
+                match_phrase: {
+                  function: functionFilter,
+                },
+              }
+            : undefined,
+        ].filter(Boolean),
       },
     },
     sort: sortField

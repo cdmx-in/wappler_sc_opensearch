@@ -51,6 +51,9 @@ Fields:
 - **Name** — Action display name
 - **Search Value** — Search string or query fragment
 - **Search Field** — Field to search in
+- **Property Key (p_key)** — Optional; filter to docs whose `p_key` field matches this value (e.g. `TRANSACTION`)
+- **Property Value (p_value)** — Optional; filter to docs whose `p_value` field matches this value (e.g. `34569345`)
+- **Function** — Optional; filter to docs whose `function` field matches this value (e.g. `NOTE`)
 - **Output Fields** — Which fields to return
 - **Sort Field** — Field to sort by (default: descending behavior)
 - **Sort Order** — `desc` or `asc`
@@ -98,6 +101,23 @@ Query example (simple search):
   "to_date": "NOW_UTC"
 }
 ```
+
+Query example (with the optional key/value and function filters):
+
+```json
+{
+  "search_value": "$_GET.tx_id",
+  "search_field": "tx_id",
+  "p_key": "TRANSACTION",
+  "p_value": "34569345",
+  "function": "NOTE",
+  "output_fields": ["@timestamp","level","message","context"],
+  "sort_field": "@timestamp",
+  "sort_order": "desc"
+}
+```
+
+> All three filters (`p_key`, `p_value`, `function`) are optional and independent — each is ANDed into the query only when a non-empty value is supplied, so you can use any combination of them.
 
 ---
 

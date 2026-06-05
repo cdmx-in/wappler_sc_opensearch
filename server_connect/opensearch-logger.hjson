@@ -216,6 +216,33 @@
             "help": "Search Field"
           },
           {
+            "name": "p_key",
+            "optionName": "p_key",
+            "title": "Property Key (p_key)",
+            "type": "text",
+            "required": false,
+            "serverDataBindings": true,
+            "help": "Optional filter: only return docs whose p_key field matches this value, ex: TRANSACTION"
+          },
+          {
+            "name": "p_value",
+            "optionName": "p_value",
+            "title": "Property Value (p_value)",
+            "type": "text",
+            "required": false,
+            "serverDataBindings": true,
+            "help": "Optional filter: only return docs whose p_value field matches this value, ex: 34569345"
+          },
+          {
+            "name": "function",
+            "optionName": "function",
+            "title": "Function",
+            "type": "text",
+            "required": false,
+            "serverDataBindings": true,
+            "help": "Optional filter: only return docs whose function field matches this value, ex: NOTE"
+          },
+          {
             "name": "output_fields",
             "optionName": "output_fields",
             "title": "Output Fields",
