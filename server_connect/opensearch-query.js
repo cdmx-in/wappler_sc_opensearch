@@ -12,7 +12,7 @@ exports.ops_query = async function (options) {
   // Optional key/value and function filters (each is ANDed in when provided)
   const pKey = this.parse(options.p_key);
   const pValue = this.parse(options.p_value);
-  const functionFilter = this.parse(options.function);
+  const functionFilter = this.parse(options.entry_type);
   const opensearchConfig = {
     node: opsUrl,
     auth: {
@@ -75,11 +75,11 @@ exports.ops_query = async function (options) {
                 },
               }
             : undefined,
-          // Optional filter on the function field, ex: function = NOTE
+          // Optional filter on the entry_type field, ex: entry_type = NOTE
           functionFilter
             ? {
                 match_phrase: {
-                  function: functionFilter,
+                  entry_type: functionFilter,
                 },
               }
             : undefined,

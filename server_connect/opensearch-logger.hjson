@@ -234,13 +234,13 @@
             "help": "Optional filter: only return docs whose p_value field matches this value, ex: 34569345"
           },
           {
-            "name": "function",
-            "optionName": "function",
+            "name": "entry_type",
+            "optionName": "entry_type",
             "title": "Function",
             "type": "text",
             "required": false,
             "serverDataBindings": true,
-            "help": "Optional filter: only return docs whose function field matches this value, ex: NOTE"
+            "help": "Optional filter: only return docs whose entry_type field matches this value, ex: NOTE"
           },
           {
             "name": "output_fields",
