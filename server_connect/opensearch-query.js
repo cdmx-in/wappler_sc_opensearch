@@ -75,9 +75,15 @@ exports.ops_query = async function (options) {
                 },
               }
             : undefined,
-          // Optional filter on the entry_type field, ex: entry_type = NOTE
+          // Optional filter on the entry_type field, ex: entry_type = NOTE or entry_type = [NOTE, TRACE]
           functionFilter
-            ? {
+            ? Array.isArray(functionFilter)
+              ? {
+                terms: {
+                  entry_type: functionFilter,
+                },
+              }
+              : {
                 match_phrase: {
                   entry_type: functionFilter,
                 },
