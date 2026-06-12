@@ -240,7 +240,7 @@
             "type": "text",
             "required": false,
             "serverDataBindings": true,
-            "help": "Optional filter: only return docs whose entry_type field matches this value, ex: NOTE"
+            "help": "Optional filter: return docs matching entry_type. Supports a single value (NOTE) or multiple values ([NOTE, TRACE])."
           },
           {
             "name": "output_fields",
